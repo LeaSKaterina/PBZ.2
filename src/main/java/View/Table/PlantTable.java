@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class PlantTable  extends TableView {
     final private TableColumn<Plant, Integer> idTableColumn;
-    final private TableColumn<Plant, Date> dateTableColumn;
+    final private TableColumn<Plant, String> dateTableColumn;
     final private TableColumn<Plant, Short> ageTableColumn;
     final private TableColumn<Plant, String> typeTableColumn;
     final private TableColumn<Plant, Watering> wateringTableColumn;
@@ -46,7 +46,7 @@ public class PlantTable  extends TableView {
         return idTableColumn;
     }
 
-    public TableColumn<Plant, Date> getDateTableColumn() {
+    public TableColumn<Plant, String> getDateTableColumn() {
         return dateTableColumn;
     }
 

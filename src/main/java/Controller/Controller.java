@@ -2,8 +2,10 @@ package Controller;
 
 import Model.*;
 import View.Alert.DatePickAlert;
+import View.Alert.EditAlert.EditCompanyInfoAlert;
 import View.Alert.EditAlert.EditParkAlert;
 import View.Alert.PlantTypeAlert;
+import View.Alert.PlantTypeAndDateAlert;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
@@ -151,6 +153,37 @@ public class Controller {
         });
 
         return list;
+    }
+
+
+    public ObservableList<Object> showPlantsByTypeAndDate(){
+        ObservableList<Object> listOfPlants = plantController.getPlantsFromDB();
+
+        PlantTypeAndDateAlert alert = new PlantTypeAndDateAlert();
+        alert.show();
+
+        ((Button) alert.getDialogPane().lookupButton(alert.getButtonTypes().get(0))).setOnAction((ae) -> {
+            listOfPlants.removeIf(plant -> !(((Plant) plant).getType().equals(alert.getType()) && ((Plant) plant).getPlantingDate().equals(alert.getDate())));
+            alert.close();
+        });
+
+        return listOfPlants;
+    }
+
+    public void editCompanyInfoProcess(){
+        EditCompanyInfoAlert editAlert = new EditCompanyInfoAlert();
+        editAlert.show();
+
+        ((Button) editAlert.getDialogPane().lookupButton(editAlert.getButtonTypes().get(0))).setOnAction((ae) -> {
+            try {
+                PreparedStatement stmt;
+                stmt = connection.prepareStatement(editAlert.getSQL());
+                stmt.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            editAlert.close();
+        });
     }
 
 

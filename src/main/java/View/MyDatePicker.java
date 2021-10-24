@@ -9,7 +9,7 @@ public class MyDatePicker extends DatePicker{
 
     public Date getDateValue(){
         if (getValue() != null) {
-            return new Date(getValue().getYear(), getValue().getMonth().ordinal(), getValue().getDayOfMonth());
+            return new Date(getValue().getYear()-1900, getValue().getMonth().ordinal(), getValue().getDayOfMonth());
         } else{
             return defaultDate;
         }

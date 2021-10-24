@@ -24,8 +24,7 @@ public class PlantTable  extends TableView {
         idTableColumn.setPrefWidth(100);
 
         dateTableColumn = new TableColumn<>("Дата высадки");
-        //ПРОБЛЕМА!!!!
-        dateTableColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        dateTableColumn.setCellValueFactory(new PropertyValueFactory<>("plantingDate"));
         dateTableColumn.setPrefWidth(200);
 
         ageTableColumn = new TableColumn<>("Возраст");

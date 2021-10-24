@@ -57,10 +57,15 @@ public class View extends GridPane {
         Button showPlantsByTypeAndDate = new Button("Показать перечень всех растений заданного вида на текущую дату");
         add(new VBox(showPlantsByType, showLabourersByDate, showPlantsByTypeAndDate),0,4);
 
+        add(new Separator(),0,5);
+
+        Button editCompanyInfoBtn = new Button("Редактировать данные о компании");
+        add(editCompanyInfoBtn,0,6);
+
         table = new CompanyTable();
         controller = new Controller(DB_URL,DB_USER, DB_PASSWORD, DB_DRIVER);
         table.setItems(controller.goToHome());
-        add(table, 1,0,1,5);
+        add(table, 1,0,1,7);
 
         homeBtn.setOnAction((ae) -> {
             table = new CompanyTable();
@@ -108,7 +113,12 @@ public class View extends GridPane {
             table = new LabourerDateTable();
             updateTable(controller.showLabourersByDate());
         });
-        showPlantsByTypeAndDate.setOnAction(ae -> {});
+        showPlantsByTypeAndDate.setOnAction(ae -> {
+            table = new PlantTable();
+            updateTable(controller.showPlantsByTypeAndDate());
+        });
+
+        editCompanyInfoBtn.setOnAction(ae ->{controller.editCompanyInfoProcess();});
 
     }
 
